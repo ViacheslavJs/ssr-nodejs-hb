@@ -1,0 +1,113 @@
+{
+  "mainCoursesList": [
+    { 
+      "id": "main-1",
+      "name": "Greek salad",
+      "price": "300",
+      "image": "img/greek-salad.webp"
+    },
+    { 
+      "id": "main-2",
+      "name": "Stew",
+      "price": "20",
+      "image": "img/stew.webp"
+    },
+    { 
+      "id": "main-3",
+      "name": "Steak",
+      "price": "10",
+      "image": "img/steak.webp"
+    }
+  ],
+
+  "appetizersList": [
+    { 
+      "id": "apps-1",
+      "name": "Japan",
+      "price": "4000",
+      "image": "img/japan.webp"
+    },
+    { 
+      "id": "apps-2",
+      "name": "App. steak",
+      "price": "15550",
+      "image": "img/ap-steak.jpg"
+    },
+    { 
+      "id": "apps-3",
+      "name": "App. salad",
+      "price": "18060",
+      "image": "img/ap-salad.webp"
+    }
+  ],
+
+  "dessertsList": [
+    { 
+      "id": "dess-1",
+      "name": "Berry dessert",
+      "price": "5",
+      "image": "img/berry-dessert.jpg"
+    },
+    { 
+      "id": "dess-2",
+      "name": "Cupcake with berries",
+      "price": "2",
+      "image": "img/cupcake-with-berries.webp"
+    },
+    { 
+      "id": "dess-3",
+      "name": "Cupcakes",
+      "price": "1",
+      "image": "img/cupcakes.jpg"
+    }
+  ],
+
+  "exchangeRates": [
+    {
+      "currency": "USD",
+      "rate": 40
+    }
+  ],
+
+  "ourServices": [
+    {
+      "title": "Table Reservation",
+      "image": "img/restaurant-table.webp",
+      "link": "/booking"
+      
+    },
+    {
+      "title": "Food Delivery",
+      "image": "img/delivery.webp",
+      "link": "/delivery"
+    }
+  ],
+
+  "categories": [
+    {
+      "name": "Main Courses",      
+      "image": "img/main-courses.webp",
+      "link": "/main-courses"
+    },
+    {
+      "name": "Appetizers",      
+      "image": "img/appetizers.webp",
+      "link": "/appetizers"
+    },
+    {
+      "name": "Desserts",      
+      "image": "img/desserts.webp",
+      "link": "/desserts"
+    }
+  ],
+
+  "ourCompany": [
+    {
+      "text": "Indulge in the taste of cozy atmosphere and exquisite dishes in the heart of the city! Welcome to our restaurant where every taste and every moment becomes special.",
+      "image": "img/restaurant.webp"
+      
+    }
+  ]
+
+}
+

@@ -1,0 +1,33 @@
+<h1 class="title">Categories</h1>
+<section class="categories">  
+
+    {{#if categories.length}}
+      {{#each categories}}           
+        <a class="categories__card" href="{{link}}">        
+          <img class="categories__image" src="{{image}}" alt="Product Image">
+          <h2 class="categories__title">{{name}}</h2>        
+        </a>          
+      {{/each}}
+    {{else}}
+      <p>No categories found</p>
+    {{/if}}
+
+</section>  
+
+<div class="top">
+  
+    {{#if description.length}}
+      {{#each description}}
+      <div class="top__inner">
+        <div class="top__image-box">
+          <a href="/services"><img class="top__image" src="{{image}}" alt="Product Image"></a>
+        </div>
+        <p class="top__text">{{text}}</p>       
+      </div>
+      {{/each}}
+    {{else}}
+      <p>No description found</p>
+    {{/if}}
+  
+</div>
+

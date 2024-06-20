@@ -1,0 +1,42 @@
+<h1 class="title">Desserts</h1>
+
+<div class="container">
+  <!-- bread crumbs -->
+  <div class="breadcrumbs">
+    <a class="breadcrumbs__link" href="/main-courses">        
+      <span class="breadcrumbss__title">main courses</span>        
+    </a>
+
+    <a class="breadcrumbs__link" href="/appetizers">        
+      <span class="breadcrumbs__title">appetizers</span>        
+    </a>
+
+    <a class="breadcrumbs__link breadcrumbs__link--inactive">        
+      <span class="breadcrumbs__title">desserts</span>        
+    </a>
+  </div>
+</div>
+
+<div class="container">
+  <section class="cards-box">
+  
+    {{#if products.length}}
+      {{#each products}}
+      <div class="cards-box__card card" id="{{id}}">
+        <div class="card__image-box">
+          <img class="card__image" src="{{image}}" alt="Product Image">
+        </div>
+        <p class="card__name"><span class="card__span-name">{{name}}</span></p>
+        <p class="card__price">Price: <span class="card__span-price">{{formatPrice}}</span></p>
+        <!--<p class="card__price">Price: <span class="card__span-price">{{price}}</span></p>-->
+        <button class="card__button">Add to cart</button>
+      </div>
+      {{/each}}
+    {{else}}
+      <p>No products found</p>
+    {{/if}}
+  
+  
+  </section>
+</div>
+
