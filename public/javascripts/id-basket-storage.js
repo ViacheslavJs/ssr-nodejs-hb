@@ -92,9 +92,11 @@ addButtons.forEach(button => {
 
 //TODO
 document.addEventListener('DOMContentLoaded', () => {
-    const btnCheckout = document.getElementById('btnCheckout');
+    const btnConfirm = document.getElementById('btnConfirm');
 
-    btnCheckout.addEventListener('click', async () => {
+  if (btnConfirm) {
+
+    btnConfirm.addEventListener('click', async () => {
         const customerName = document.getElementById('customerName').value;
         const customerEmail = document.getElementById('customerEmail').value;
 
@@ -128,6 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Ошибка при отправке заказа');
         }
     });
+
+ }//if
+
 });
 
 //TODO

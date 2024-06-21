@@ -75,6 +75,12 @@ app.get('/', async (req, res) => {
   }
 });
 
+//TODO Маршрут для страницы checkout
+app.get('/checkout', (req, res) => {
+    res.render('checkout');
+});
+//TODO
+
 //TODO Маршрут для отправки email с данными корзины
 app.post('/send-order', express.json(), async (req, res) => {
     const { basket, customerName, customerEmail } = req.body;

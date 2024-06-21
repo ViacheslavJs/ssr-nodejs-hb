@@ -444,10 +444,26 @@ li {
   border: 1px solid #2c97ea; /* none */
   border-radius: 3px;
   font-size: 16px;
+  font-weight: 500;
   background: transparent;
   padding: 3px 15px; /* 0 */
   cursor: pointer;
   color: #2c97ea;
+}
+
+.basket__btn-checkout {
+  outline: none;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #21a366; /* none */
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+  padding: 3px 15px; /* 0 */
+  cursor: pointer;
+  color: #21a366;
 }
 
 /* order-form */
