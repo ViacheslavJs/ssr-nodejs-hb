@@ -8,6 +8,17 @@ class Product {
   }
 }
 
+function updateConfirmButtonState() {
+  const btnConfirm = document.getElementById('btnConfirm');
+  if (btnConfirm) {    
+    if (basket.totalItems() === 0) {
+      btnConfirm.disabled = true;
+    } else {
+      btnConfirm.disabled = false;
+    }
+  }
+}
+
 //TODO STEP 2: Создание корзины с использованием синтаксиса класса
 class Basket {
   constructor() {
@@ -23,6 +34,7 @@ class Basket {
     }
     this.saveToLocalStorage();
     logBasketItems();
+    updateConfirmButtonState();
   }
 
   removeItem(product) {
@@ -32,12 +44,21 @@ class Basket {
     }
     this.saveToLocalStorage();
     logBasketItems();
+    updateConfirmButtonState();
   }
 
   clearBasket() {
     this.items = [];
     this.saveToLocalStorage();
     logBasketItems();
+    updateConfirmButtonState();
+  }
+
+  // метод очистки корзины после успешной отправки
+  clearBasketAfterOrder() {
+    this.items = [];
+    this.saveToLocalStorage();
+    updateConfirmButtonState();
   }
 
   saveToLocalStorage() {
@@ -50,6 +71,7 @@ class Basket {
       this.items = JSON.parse(savedItems);
     }
     logBasketItems();
+    updateConfirmButtonState();
   }
 
   totalItems() {
@@ -125,6 +147,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
             console.log('Order sent:', result);
             alert('Ваш заказ успешно отправлен!');
+
+            // Очистка корзины после успешной отправки
+            basket.clearBasketAfterOrder();
+            updateBasketDisplay();
         } catch (error) {
             console.error('Error sending order:', error);
             alert('Ошибка при отправке заказа');
@@ -177,7 +203,15 @@ function updateBasketDisplay() {
 
     basketItemsElement.appendChild(itemElement);
   });
+
+  updateConfirmButtonState();
+
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  basket.loadFromLocalStorage();
+  updateBasketDisplay();
+});
 
 // Обработчик для иконки корзины
 document.addEventListener("DOMContentLoaded", function() {
