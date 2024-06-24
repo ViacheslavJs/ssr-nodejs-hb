@@ -1,18 +1,19 @@
-<h1>Services</h1>
-
 <section class="services">
-      
-      {{#if services.length}}
-        {{#each services}}
-          <a class="services__card" href="{{link}}">
-            <img class="services__image" src="{{image}}" alt="Product Image">
-            <h2 class="services__title">{{title}}</h2>
-          </a>
-        {{/each}}
-      {{else}}
-              
-      <p>No services found</p>
-      {{/if}}
+  <h1 class="title">Services</h1>
+  <div class="services-box">
   
+    {{#if services.length}}
+      {{#each services}}
+        <a class="services__card" href="{{link}}">
+          <img class="services__image" src="{{image}}" alt="Product Image">
+          <h2 class="services__title">{{title}}</h2>
+        </a>
+      {{/each}}
+    {{else}}
+              
+    <p>No services found</p>
+    {{/if}}
+  
+  </div>
 </section>
 

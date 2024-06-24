@@ -1,6 +1,6 @@
-<h1 class="title">Categories</h1>
 <section class="categories">  
-
+  <h1 class="title">Categories</h1>
+  <div class="categories-box">  
     {{#if categories.length}}
       {{#each categories}}           
         <a class="categories__card" href="{{link}}">        
@@ -11,7 +11,7 @@
     {{else}}
       <p>No categories found</p>
     {{/if}}
-
+  </div>
 </section>  
 
 <div class="top">

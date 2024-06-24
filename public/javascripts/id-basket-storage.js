@@ -102,7 +102,7 @@ addButtons.forEach(button => {
   button.addEventListener('click', () => {
     const card = button.closest('.card');
     const id = card.getAttribute('id');  // предполагается, что id у карточки это уникальный идентификатор
-    const name = card.querySelector('.card__span-name').textContent;
+    const name = card.querySelector('.card__name').textContent;
     const priceFormatted = card.querySelector('.card__span-price').textContent;
     const image = card.querySelector('.card__image').src;
 

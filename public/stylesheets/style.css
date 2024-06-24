@@ -180,12 +180,12 @@ h6 {
 
 .card__name,
 .card__price {
-  color: #88888a;
+  color: #444445;
 }
 
-.card__span-name,
 .card__span-price {
   color: #444445;
+  font-weight: 500;
 }
 
 .card__image-box {
@@ -505,11 +505,14 @@ li {
 
 /* categories */
 .categories {
+  background-color: #f0f0f0;
+}
+
+.categories-box {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
   gap: 20px;
   padding: 20px;
-  background-color: #f0f0f0;
 }
 
 .categories__card {
@@ -547,11 +550,14 @@ li {
 
 /* services */
 .services {
+  background-color: #f0f0f0;
+}
+
+.services-box {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
   gap: 20px;
   padding: 20px;
-  background-color: #f0f0f0;
 }
 
 .services__card {
