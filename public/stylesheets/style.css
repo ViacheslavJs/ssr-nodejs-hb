@@ -133,14 +133,20 @@ h6 {
 /*****************************/
 
 .header {
-  min-height: 100px; 
+  min-height: 75px; 
   background-color: #ffffff; 
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center; 
-  padding: 0 20px; 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  padding: 10px 20px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);    
+}
+
+@media screen and (max-width: 520px) {
+  .header {
+    flex-direction: column;
+  }
 }
 
 .header__logo-link {
@@ -150,7 +156,33 @@ h6 {
 
 .header__logo-image {
   height: auto; 
-  max-height: 50px; 
+  max-height: 45px; 
+}
+
+.nav { 
+  display: flex;
+  flex-direction: row;		 
+  justify-content: center; 
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0; 
+}
+
+.nav__link {
+  color: #4b5e6c;
+  font-weight: 500;
+}
+
+.nav__link--inactive {
+  color: silver;
+  cursor: default;
+}
+
+@media screen and (max-width: 520px) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .cards-box {
@@ -596,21 +628,4 @@ li {
 }
 
 
-.breadcrumbs { 
-  display: flex;
-  flex-direction: row;		 
-  justify-content: center; 
-  align-items: center;
-  gap: 15px;
-}
-
-.breadcrumbs__link {
-  color: #4b5e6c;
-  font-weight: 500;
-}
-
-.breadcrumbs__link--inactive {
-  color: silver;
-  cursor: default;
-}
 
