@@ -64,8 +64,8 @@
 
   "exchangeRates": [
     {
-      "currency": "EUR",
-      "rate": 42
+      "currency": "USD",
+      "rate": 40
     }
   ],
 
