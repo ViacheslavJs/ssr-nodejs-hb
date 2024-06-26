@@ -77,6 +77,31 @@ class Basket {
   totalItems() {
     return this.items.reduce((total, item) => total + item.quantity, 0);
   }
+
+  //TODO - суммирование для корзины
+  totalPrice() {
+    let total = 0;
+    let rightPart = '';
+    this.items.forEach(item => {
+      const itemPriceString = item.product.priceFormatted;
+      const match = itemPriceString.match(/[\d,.]+/);
+
+      if (match) {
+        const cleanedPriceString = match[0];
+        const itemPrice = parseFloat(cleanedPriceString.replace(',', '.')); 
+
+        const startIndex = itemPriceString.indexOf(cleanedPriceString);
+        const endIndex = startIndex + cleanedPriceString.length;
+
+        rightPart = itemPriceString.slice(endIndex);
+
+        total += itemPrice * item.quantity;
+      }
+    });
+    return { total: total.toFixed(2), rightPart };
+  }
+  //TODO - суммирование для корзины
+
 }
 
 // Функция для вывода списка товаров в консоль
@@ -127,6 +152,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const { total, rightPart } = basket.totalPrice(); // Получение общей суммы и части справа
+        const totalAmount = { total, rightPart }; // Создание объекта с total и rightPart
+
         try {
             const response = await fetch('/send-order', {
                 method: 'POST',
@@ -136,7 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ 
                     basket: basket.items, 
                     customerName: customerName,
-                    customerEmail: customerEmail 
+                    customerEmail: customerEmail,
+                    totalAmount: total, // Передача общей суммы 
+                    rightPart: rightPart // Передача части справа
                 })
             });
 
@@ -203,6 +233,14 @@ function updateBasketDisplay() {
 
     basketItemsElement.appendChild(itemElement);
   });
+
+  //TODO отображение общей суммы в корзине
+  const { total, rightPart } = basket.totalPrice();
+  const totalPriceElement = document.createElement('div');
+  totalPriceElement.className = 'total-price';
+  totalPriceElement.textContent = `Total: ${total}${rightPart}`;
+  basketItemsElement.appendChild(totalPriceElement);
+  //TODO отображение общей суммы в корзине
 
   updateConfirmButtonState();
 

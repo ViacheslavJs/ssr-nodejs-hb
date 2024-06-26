@@ -83,7 +83,7 @@ app.get('/checkout', (req, res) => {
 
 //TODO Маршрут для отправки email с данными корзины
 app.post('/send-order', express.json(), async (req, res) => {
-    const { basket, customerName, customerEmail } = req.body;
+    const { basket, customerName, customerEmail, totalAmount, rightPart } = req.body;
 
     const basketItems = basket.map(item => `
         <div>
@@ -95,6 +95,7 @@ app.post('/send-order', express.json(), async (req, res) => {
     const emailContent = `
         <h2>Заказ</h2>
         ${basketItems}
+        <h3>Общая сумма: ${totalAmount}${rightPart}</h3>  <!-- Добавление общей суммы -->
         <h3>Заранее спасибо!</h3>
     `;
 
