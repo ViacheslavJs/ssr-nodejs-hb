@@ -81,24 +81,38 @@ class Basket {
   //TODO - суммирование для корзины
   totalPrice() {
     let total = 0;
-    let rightPart = '';
+    let currencySymbol = '';
     this.items.forEach(item => {
+      //console.log(this.items);
+      //console.log(item);
+      //console.log(item.product);
+      //console.log(item.product.priceFormatted);
       const itemPriceString = item.product.priceFormatted;
       const match = itemPriceString.match(/[\d,.]+/);
+      console.log(match);
 
       if (match) {
         const cleanedPriceString = match[0];
+        console.log(cleanedPriceString);
         const itemPrice = parseFloat(cleanedPriceString.replace(',', '.')); 
+        console.log(itemPrice);
 
         const startIndex = itemPriceString.indexOf(cleanedPriceString);
+        console.log(startIndex);
         const endIndex = startIndex + cleanedPriceString.length;
+        console.log(endIndex);
 
-        rightPart = itemPriceString.slice(endIndex);
+        currencySymbol = itemPriceString.slice(endIndex).trim();
+        console.log(currencySymbol);
 
         total += itemPrice * item.quantity;
       }
     });
-    return { total: total.toFixed(2), rightPart };
+
+    // Замена точки на запятую в общей сумме
+    const formattedTotal = total.toFixed(2).replace('.', ',');
+
+    return { total: formattedTotal, currencySymbol };
   }
   //TODO - суммирование для корзины
 
@@ -152,8 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const { total, rightPart } = basket.totalPrice(); // Получение общей суммы и части справа
-        const totalAmount = { total, rightPart }; // Создание объекта с total и rightPart
+        const { total, currencySymbol } = basket.totalPrice(); // Получение общей суммы и части справа
+        const totalAmount = { total, currencySymbol }; // Создание объекта с total и currencySymbol
 
         try {
             const response = await fetch('/send-order', {
@@ -166,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     customerName: customerName,
                     customerEmail: customerEmail,
                     totalAmount: total, // Передача общей суммы 
-                    rightPart: rightPart // Передача части справа
+                    currencySymbol: currencySymbol // Передача части справа
                 })
             });
 
@@ -235,10 +249,10 @@ function updateBasketDisplay() {
   });
 
   //TODO отображение общей суммы в корзине
-  const { total, rightPart } = basket.totalPrice();
+  const { total, currencySymbol } = basket.totalPrice();
   const totalPriceElement = document.createElement('div');
   totalPriceElement.className = 'total-price';
-  totalPriceElement.textContent = `Total: ${total}${rightPart}`;
+  totalPriceElement.textContent = `Total: ${total} ${currencySymbol}`;
   basketItemsElement.appendChild(totalPriceElement);
   //TODO отображение общей суммы в корзине
 
