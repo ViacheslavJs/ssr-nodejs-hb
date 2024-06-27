@@ -64,8 +64,8 @@
 
   "exchangeRates": [
     {
-      "currency": "UAH",
-      "rate": 1
+      "currency": "USD",
+      "rate": 40
     }
   ],
 
