@@ -1,4 +1,4 @@
-//TODO STEP 1: Определение функции-конструктора с использованием синтаксиса класса
+// STEP 1: Определение функции-конструктора с использованием синтаксиса класса
 class Product {
   constructor(id, name, priceFormatted, image) {
     this.id = id;
@@ -19,7 +19,7 @@ function updateConfirmButtonState() {
   }
 }
 
-//TODO STEP 2: Создание корзины с использованием синтаксиса класса
+// STEP 2: Создание корзины с использованием синтаксиса класса
 class Basket {
   constructor() {
     this.items = [];
@@ -78,43 +78,35 @@ class Basket {
     return this.items.reduce((total, item) => total + item.quantity, 0);
   }
 
-  //TODO - суммирование для корзины
+  // суммирование для корзины
   totalPrice() {
     let total = 0;
     let currencySymbol = '';
+
     this.items.forEach(item => {
-      //console.log(this.items);
-      //console.log(item);
-      //console.log(item.product);
-      //console.log(item.product.priceFormatted);
       const itemPriceString = item.product.priceFormatted;
-      const match = itemPriceString.match(/[\d,.]+/);
-      console.log(match);
+      console.log(itemPriceString);
 
-      if (match) {
-        const cleanedPriceString = match[0];
-        console.log(cleanedPriceString);
-        const itemPrice = parseFloat(cleanedPriceString.replace(',', '.')); 
-        console.log(itemPrice);
+      // Извлечение числовой части из строки!-цены
+      //const itemPrice = parseFloat(itemPriceString.replace(/\s/g, '').replace(',', '.')); // если 'ru-RU'
+      const itemPrice = parseFloat(itemPriceString.replace(/[^\d.-]/g, '')); // если 'en-US'
+      console.log(itemPrice);
 
-        const startIndex = itemPriceString.indexOf(cleanedPriceString);
-        console.log(startIndex);
-        const endIndex = startIndex + cleanedPriceString.length;
-        console.log(endIndex);
-
-        currencySymbol = itemPriceString.slice(endIndex).trim();
-        console.log(currencySymbol);
-
+      if (!isNaN(itemPrice)) {
         total += itemPrice * item.quantity;
+        currencySymbol = itemPriceString.replace(/[\d\s.,]/g, '').trim(); 
       }
     });
 
-    // Замена точки на запятую в общей сумме
-    const formattedTotal = total.toFixed(2).replace('.', ',');
+    //const formattedTotal = total.toLocaleString('ru-RU', { minimumFractionDigits: 2 }); // если 'ru-RU'
+    const formattedTotal = total.toLocaleString('en-US', { minimumFractionDigits: 2 }); // если 'en-US'
+    console.log(formattedTotal);
+    console.log(currencySymbol);
 
+    console.log( { total: formattedTotal, currencySymbol } );
     return { total: formattedTotal, currencySymbol };
   }
-  //TODO - суммирование для корзины
+  // суммирование для корзины
 
 }
 
@@ -129,18 +121,18 @@ function logBasketItems() {
   }
 }
 
-//TODO STEP 3: Создание экземпляра корзины
+// STEP 3: Создание экземпляра корзины
 const basket = new Basket();
 basket.loadFromLocalStorage(); // Загрузка данных корзины из LocalStorage
 logBasketItems();
 updateBasketDisplay();
 
-//TODO STEP 4: Обработчики событий для кнопок
+// STEP 4: Обработчики событий для кнопок
 const addButtons = document.querySelectorAll('.card__button');
 addButtons.forEach(button => {
   button.addEventListener('click', () => {
     const card = button.closest('.card');
-    const id = card.getAttribute('id');  // предполагается, что id у карточки это уникальный идентификатор
+    const id = card.getAttribute('id');  // id карточки
     const name = card.querySelector('.card__name').textContent;
     const priceFormatted = card.querySelector('.card__span-price').textContent;
     const image = card.querySelector('.card__image').src;
@@ -151,7 +143,7 @@ addButtons.forEach(button => {
   });
 });
 
-//TODO
+//
 document.addEventListener('DOMContentLoaded', () => {
     const btnConfirm = document.getElementById('btnConfirm');
 
@@ -166,8 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const { total, currencySymbol } = basket.totalPrice(); // Получение общей суммы и части справа
-        const totalAmount = { total, currencySymbol }; // Создание объекта с total и currencySymbol
+        const { total, currencySymbol } = basket.totalPrice(); // получение суммы и символа
+        const totalAmount = { total, currencySymbol }; // создание объекта с total и currencySymbol
 
         try {
             const response = await fetch('/send-order', {
@@ -179,8 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     basket: basket.items, 
                     customerName: customerName,
                     customerEmail: customerEmail,
-                    totalAmount: total, // Передача общей суммы 
-                    currencySymbol: currencySymbol // Передача части справа
+                    totalAmount: total, // сумма
+                    currencySymbol: currencySymbol // символ
                 })
             });
 
@@ -192,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Order sent:', result);
             alert('Ваш заказ успешно отправлен!');
 
-            // Очистка корзины после успешной отправки
+            // Очистка корзины после отправки
             basket.clearBasketAfterOrder();
             updateBasketDisplay();
         } catch (error) {
@@ -204,8 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
  }//if
 
 });
-
-//TODO
+//
 
 // Обработчик для кнопки "Очистить"
 const btnClear = document.getElementById('btnClear');
@@ -214,7 +205,7 @@ btnClear.addEventListener('click', () => {
   updateBasketDisplay();
 });
 
-//TODO STEP 5: Обновление отображения корзины
+// STEP 5: Обновление отображения корзины
 function updateBasketDisplay() {
   const basketItemsElement = document.getElementById('basket-items');
   basketItemsElement.innerHTML = '';
@@ -248,13 +239,14 @@ function updateBasketDisplay() {
     basketItemsElement.appendChild(itemElement);
   });
 
-  //TODO отображение общей суммы в корзине
+  // отображение общей суммы в корзине
   const { total, currencySymbol } = basket.totalPrice();
   const totalPriceElement = document.createElement('div');
   totalPriceElement.className = 'total-price';
-  totalPriceElement.textContent = `Total: ${total} ${currencySymbol}`;
+  //totalPriceElement.textContent = `Total: ${total} ${currencySymbol}`; // если 'ru-RU'
+  totalPriceElement.textContent = `Total: ${currencySymbol}${total}`; // если 'en-US'
   basketItemsElement.appendChild(totalPriceElement);
-  //TODO отображение общей суммы в корзине
+  // отображение общей суммы в корзине
 
   updateConfirmButtonState();
 
@@ -274,10 +266,28 @@ document.addEventListener("DOMContentLoaded", function() {
     if (basketElement.classList.contains("hide") || !basketElement.classList.contains("show")) {
       basketElement.classList.remove("hide");
       basketElement.classList.add("show");
+      basket.loadFromLocalStorage(); //TODO test
+      updateBasketDisplay(); //TODO test
     } else {
       basketElement.classList.remove("show");
       basketElement.classList.add("hide");
     }
   });
+});
+
+//TODO test - popstate: 'вперёд-назад' обновление корзины
+window.addEventListener('popstate', () => {
+  basket.loadFromLocalStorage();
+  updateBasketDisplay(); 
+  reload();
+});
+
+//TODO test
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    // обновление корзины, если страница возвращена из кэша
+    basket.loadFromLocalStorage();
+    updateBasketDisplay();
+  }
 });
 

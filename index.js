@@ -95,7 +95,8 @@ app.post('/send-order', express.json(), async (req, res) => {
     const emailContent = `
         <h2>Заказ</h2>
         ${basketItems}
-        <h3>Общая сумма: ${totalAmount} ${currencySymbol}</h3>  <!-- Добавление общей суммы -->
+        <!--<h3>Общая сумма: ${totalAmount} ${currencySymbol}</h3>-->  <!-- если 'ru-RU' -->
+        <h3>Общая сумма: ${currencySymbol}${totalAmount}</h3>  <!-- если 'en-US' -->
         <h3>Заранее спасибо!</h3>
     `;
 
