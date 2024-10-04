@@ -3,7 +3,7 @@ require('dotenv').config();
 
 // Настройка транспорта для отправки email
 const transporter = nodemailer.createTransport({
-    service: 'outlook',
+    service: process.env.SERVICE,
     auth: {
         user: process.env.EMAIL,
         pass: process.env.PASSWORD
